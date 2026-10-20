@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ShroomVR Installer
+Comment=Install, update and remove Shroom and Gloom VR
+Exec=shroomvr-installer
+Icon=shroomvr-installer
+Terminal=false
+Categories=Game;

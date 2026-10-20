@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>ShroomVR</AssemblyName>
+    <RootNamespace>ShroomVR</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Version>0.0.0-dev</Version>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <NoWarn>$(NoWarn);CS0618;CS8632</NoWarn>
+    <!-- Reference assemblies for the game (lib/interop), or the ones BepInEx generated in your install. -->
+    <InteropDir Condition="'$(InteropDir)' == ''">$(MSBuildThisFileDirectory)../../lib/interop</InteropDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.755" IncludeAssets="compile" PrivateAssets="all" />
+    <Reference Include="$(InteropDir)/*.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- The plugin attribute needs the version as a constant. -->
+  <Target Name="WriteBuildInfo" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <BuildInfoFile>$(IntermediateOutputPath)BuildInfo.g.cs</BuildInfoFile>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(BuildInfoFile)" Overwrite="true" WriteOnlyWhenDifferent="true"
+                      Lines="namespace ShroomVR%3B;internal static class BuildInfo { public const string Version = &quot;$(Version)&quot;%3B }" />
+    <ItemGroup>
+      <Compile Include="$(BuildInfoFile)" />
+      <FileWrites Include="$(BuildInfoFile)" />
+    </ItemGroup>
+  </Target>
+
+</Project>

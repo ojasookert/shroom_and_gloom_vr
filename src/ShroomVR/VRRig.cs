@@ -63,10 +63,31 @@ public class VRRig : MonoBehaviour
         OverlayViewCamera();
         if (_deck == null || _deckCam == null) return;
         var root = _deck.transform;
+        SeeThroughDeckBackground();
         // Deck Display Camera sits at the display root's origin; align the camera with the main camera.
         var camLocal = Matrix4x4.TRS(_deckCam.transform.localPosition, _deckCam.transform.localRotation, Vector3.one);
         var rootWorld = main.transform.localToWorldMatrix * camLocal.inverse;
         root.SetPositionAndRotation(rootWorld.MultiplyPoint3x4(Vector3.zero), rootWorld.rotation);
+    }
+
+    static UnityEngine.UI.Image _deckBlack;
+
+    /// <summary>
+    /// The deck view covers the world with an opaque black image. Like the pause menu, it is dimmed
+    /// instead, so you still see where you are.
+    /// </summary>
+    static void SeeThroughDeckBackground()
+    {
+        if (_deckBlack == null)
+        {
+            var t = _deck.transform.Find("Deck Displays Canvas/Deck Display/UIBehindCardsRect/BlackBackgroundGroup/Black");
+            if (t == null) return;
+            _deckBlack = t.GetComponent<UnityEngine.UI.Image>();
+            if (_deckBlack == null) return;
+        }
+        float alpha = Mathf.Clamp01(VRConfig.DeckBackgroundOpacity.Value);
+        var c = _deckBlack.color;
+        if (Mathf.Abs(c.a - alpha) > 0.001f) _deckBlack.color = new Color(c.r, c.g, c.b, alpha);
     }
 
     static Camera OverlayViewCamera()
@@ -105,6 +126,9 @@ public class VRRig : MonoBehaviour
         public int Depth;
         public float RestoredFov = -1f;
         public int Frame;
+        /// <summary>The camera carries content that belongs to the world, not to your head (the deck's cards).</summary>
+        public bool PinContent;
+        public readonly List<(Transform t, Vector3 localPos, Quaternion localRot, Vector3 pos, Quaternion rot)> Pinned = new();
     }
 
     readonly Dictionary<IntPtr, CamState> _cams = new();
@@ -332,6 +356,7 @@ public class VRRig : MonoBehaviour
             st.SavedLocalPos = cam.transform.localPosition;
             st.SavedLocalRot = cam.transform.localRotation;
             st.Depth = Depth(cam.transform);
+            st.PinContent = cam == _deckCam;
             // XR overwrites fieldOfView with the headset's; only accept changes the game itself made.
             float f = cam.fieldOfView;
             if (Mathf.Abs(f - st.RestoredFov) > 0.01f && f < 90f) st.FlatFov = f;
@@ -364,7 +389,20 @@ public class VRRig : MonoBehaviour
             // stay registered with the main view while following the head.
             var relative = st.Flat * ReferenceFlat.inverse;
             var camWorld = relative * Rigid(HeadPosition, HeadRotation);
+            // The deck view's cards hang under its camera; they stay where the game put them, next to
+            // the deck panel, instead of riding along with your head.
+            st.Pinned.Clear();
+            if (st.PinContent)
+            {
+                var ct = cam.transform;
+                for (int i = 0; i < ct.childCount; i++)
+                {
+                    var c = ct.GetChild(i);
+                    if (c.GetComponent<Camera>() == null) st.Pinned.Add((c, c.localPosition, c.localRotation, c.position, c.rotation));
+                }
+            }
             cam.transform.SetPositionAndRotation(camWorld.MultiplyPoint3x4(Vector3.zero), camWorld.rotation);
+            foreach (var p in st.Pinned) p.t.SetPositionAndRotation(p.pos, p.rot);
             st.Overridden = true;
             cam.SetStereoViewMatrix(Camera.StereoscopicEye.Left, EyeView(relative, _eyeLeft));
             cam.SetStereoViewMatrix(Camera.StereoscopicEye.Right, EyeView(relative, _eyeRight));
@@ -402,6 +440,13 @@ public class VRRig : MonoBehaviour
                 cam.transform.localRotation = st.SavedLocalRot;
                 st.Overridden = false;
             }
+            foreach (var p in st.Pinned)
+            {
+                if (p.t == null) continue;
+                p.t.localPosition = p.localPos;
+                p.t.localRotation = p.localRot;
+            }
+            st.Pinned.Clear();
             cam.ResetStereoViewMatrices();
             cam.stereoTargetEye = StereoTargetEyeMask.None;
             cam.orthographic = st.SavedOrtho;

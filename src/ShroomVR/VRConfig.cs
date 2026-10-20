@@ -39,6 +39,7 @@ public static class VRConfig
     public static ConfigEntry<bool> CardsInHand;
     public static ConfigEntry<float> CardHandScale;
     public static ConfigEntry<float> CardHandTilt;
+    public static ConfigEntry<float> DeckBackgroundOpacity;
     public static ConfigEntry<float> CardHandTurn;
     public static ConfigEntry<bool> HoldCastCard;
     public static ConfigEntry<float> HeldCardScale;
@@ -65,6 +66,7 @@ public static class VRConfig
             "Body: the HUD, hand of cards and menus stay in front of your body. Head: they lazily follow where you look.");
         UiFollowSpeed = cfg.Bind("UI", "FollowSpeed", 2.5f, "How fast the UI catches up in Head anchor mode.");
         UiFollowThreshold = cfg.Bind("UI", "FollowThreshold", 25f, "Degrees you can look away before the UI starts following (Head anchor mode).");
+        DeckBackgroundOpacity = cfg.Bind("UI", "DeckBackgroundOpacity", 0.7f, "How dark the deck view's background is, 0..1. The game uses 1 (black); lower lets you see the world behind it.");
 
         Turn = cfg.Bind("Comfort", "TurnMode", TurnMode.Off,
             "Right stick turning. Off by default: the game turns you to face every encounter and nothing happens behind you, so the sticks navigate instead (recenter faces you forward). Snap/Smooth give the right stick's sideways push to turning.");

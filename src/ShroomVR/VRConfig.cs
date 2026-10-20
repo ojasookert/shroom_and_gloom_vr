@@ -38,6 +38,8 @@ public static class VRConfig
     public static ConfigEntry<float> MapScale;
     public static ConfigEntry<bool> CardsInHand;
     public static ConfigEntry<float> CardHandScale;
+    public static ConfigEntry<float> CardHandTilt;
+    public static ConfigEntry<float> CardHandTurn;
     public static ConfigEntry<bool> HoldCastCard;
     public static ConfigEntry<float> HeldCardScale;
     public static ConfigEntry<float> TriggerThreshold;
@@ -83,6 +85,8 @@ public static class VRConfig
         MapScale = cfg.Bind("Hands", "MapScale", 1.6f, "Size of the map in your hand.");
         CardsInHand = cfg.Bind("Hands", "CardsInHand", true, "Hold your hand of cards in the off hand (left, or right when LeftHanded) instead of along the bottom of your view.");
         CardHandScale = cfg.Bind("Hands", "CardHandScale", 0.33f, "Size of the hand of cards you hold, relative to the game's layout.");
+        CardHandTilt = cfg.Bind("Hands", "CardHandTilt", 45f, "Degrees the hand of cards is tilted back towards you from the controller's pointing direction.");
+        CardHandTurn = cfg.Bind("Hands", "CardHandTurn", 20f, "Degrees the hand of cards is turned in towards your body.");
         HoldCastCard = cfg.Bind("Hands", "HoldCastCard", true, "A card you are playing is held in the laser hand instead of the game's dotted cast line.");
         HeldCardScale = cfg.Bind("Hands", "HeldCardScale", 0.35f, "Size of the card you are playing, relative to the game's.");
         TriggerThreshold = cfg.Bind("Hands", "TriggerThreshold", 0.5f, "How far the trigger (or grip) is pulled before it clicks, 0..1. It lets go a little below that.");

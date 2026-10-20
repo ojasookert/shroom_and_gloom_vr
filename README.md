@@ -55,7 +55,8 @@ The buttons match the game's gamepad prompts. Using a stick switches the game to
 aim the laser again and it switches back. Everything can be rebound in SteamVR's controller settings.
 
 Settings are in `BepInEx/config/com.shroomvr.shroomandgloom.cfg` in the game folder: UI distance,
-snap/smooth turning (off by default), trigger threshold, card and map sizes, comfort options.
+snap/smooth turning (off by default), trigger threshold, card and map sizes, the angle you hold your
+cards at, comfort options.
 
 ## Building
 

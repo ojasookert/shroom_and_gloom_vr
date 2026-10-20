@@ -74,17 +74,20 @@ public static class CardHand
         }
     }
 
-    /// <summary>The hand of cards' pose for this frame: just above the controller, facing the eyes.</summary>
+    /// <summary>
+    /// The hand of cards' pose for this frame: fixed to the controller like a hand of real cards, just
+    /// above it and facing back up its pointing direction, tilted and turned towards you.
+    /// </summary>
     static Matrix4x4 HandDisplay(HandRig hand)
     {
         float k = Mathf.Max(0.1f, VRConfig.CardHandScale.Value) * VRRig.Scale;
         var grip = hand.Grip;
         var anchor = grip.position + grip.rotation * new Vector3(0f, 0.06f, 0.05f) * VRRig.Scale;
-        var toAnchor = anchor - VRRig.HeadPosition;
-        if (toAnchor.sqrMagnitude < 1e-6f) toAnchor = grip.forward;
-        // The camera sees its hand along Pivot; you see this one along eye -> anchor.
+        // The camera sees its hand along Pivot; you see this one along the aim pose's pointing direction,
+        // pitched down by the tilt and turned in towards the body.
+        float turn = hand.Side == Hand.Left ? -VRConfig.CardHandTurn.Value : VRConfig.CardHandTurn.Value;
         var seenInGame = Quaternion.LookRotation(Pivot.normalized, Vector3.up);
-        var seenHere = Quaternion.LookRotation(toAnchor.normalized, grip.rotation * Vector3.up);
+        var seenHere = hand.Aim.rotation * Quaternion.Euler(VRConfig.CardHandTilt.Value, turn, 0f);
         var rot = seenHere * Quaternion.Inverse(seenInGame);
         return Matrix4x4.TRS(anchor, rot, Vector3.one * k) * Matrix4x4.Translate(-Pivot);
     }
@@ -305,8 +308,15 @@ public static class CardHand
     public static string Describe()
     {
         var sb = new System.Text.StringBuilder();
+        var hand = VRRig.Instance == null ? null : VRConfig.LeftHanded.Value ? VRRig.Instance.Right : VRRig.Instance.Left;
         foreach (var s in _lastShown)
+        {
             sb.AppendLine($"shown {s.Root?.name} game={s.Pos} shownAt={s.World.MultiplyPoint3x4(Pivot)} scale={s.World.lossyScale.x:F2} cards={(s.Root != null && HasCards(s.Root))}");
+            if (hand == null) continue;
+            // Relative to the controller: constant when the hand of cards is fixed to it.
+            var rel = hand.Grip.worldToLocalMatrix * s.World;
+            sb.AppendLine($"  in grip: pos={rel.MultiplyPoint3x4(Pivot).ToString("F4")} rot={rel.rotation.eulerAngles.ToString("F2")}");
+        }
         var model = _caster != null ? _caster.Model : null;
         sb.AppendLine($"casting={(model != null && model.IsCasting)} held={(HeldCard() != null)} light={(_cardLight != null ? _cardLight.name : "-")}");
         return sb.ToString();

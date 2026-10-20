@@ -65,3 +65,7 @@ The mod and installer source is MIT, see [LICENSE](LICENSE). It doesn't cover:
   (`licenses/`). The C# OpenVR bindings in `src/ShroomVR/ThirdParty` are from the same SDK.
 - `lib/interop`: generated from Shroom and Gloom, which belongs to Team Lazerbeam / Devolver Digital.
 - BepInEx (LGPL-2.1) and the game's library art, which the installer downloads on your machine.
+
+## Donate
+
+https://ko-fi.com/ojasookert

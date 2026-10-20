@@ -18,6 +18,9 @@ Fan project, not affiliated with Team Lazerbeam or Devolver Digital.
 - Steam Frame
 - Shroom and Gloom 0.6.41
 
+If you play it on a different setup, [open an issue](https://github.com/ojasookert/shroom_and_gloom_vr/issues)
+and say how it went, working or not.
+
 ## Install
 
 1. Start Shroom and Gloom once from Steam, then quit. This sets up its Proton prefix.

@@ -1,4 +1,4 @@
-![Shroom and Gloom VR](docs/header.png)
+<p align="center"><img src="docs/header.png" alt="Shroom and Gloom VR" width="720"></p>
 
 # Shroom and Gloom VR
 
@@ -17,7 +17,7 @@ Fan project, not affiliated with Team Lazerbeam or Devolver Digital.
    executable and run it.
 3. Press **Install**.
 
-![The installer](docs/installer.png)
+<p align="center"><img src="docs/installer.png" alt="The installer" width="420"></p>
 
 The installer finds the game in your Steam libraries, installs BepInEx and the mod, and adds
 **Shroom and Gloom VR** to your Steam library (Steam restarts once for that). Play from that entry or with

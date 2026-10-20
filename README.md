@@ -1,3 +1,5 @@
+![Shroom and Gloom VR](docs/header.png)
+
 # Shroom and Gloom VR
 
 A VR mod for [Shroom and Gloom](https://store.steampowered.com/app/3271280/) on SteamVR: stereo
@@ -14,6 +16,8 @@ Fan project, not affiliated with Team Lazerbeam or Devolver Digital.
    [latest release](https://github.com/ojasookert/shroom_and_gloom_vr/releases/latest), make it
    executable and run it.
 3. Press **Install**.
+
+![The installer](docs/installer.png)
 
 The installer finds the game in your Steam libraries, installs BepInEx and the mod, and adds
 **Shroom and Gloom VR** to your Steam library (Steam restarts once for that). Play from that entry or with
@@ -64,7 +68,8 @@ The mod and installer source is MIT, see [LICENSE](LICENSE). It doesn't cover:
 - `game/Shroom and Gloom_Data/Plugins/x86_64/*.dll`: Valve's OpenVR XR plugin and OpenVR API, BSD 3-Clause
   (`licenses/`). The C# OpenVR bindings in `src/ShroomVR/ThirdParty` are from the same SDK.
 - `lib/interop`: generated from Shroom and Gloom, which belongs to Team Lazerbeam / Devolver Digital.
-- BepInEx (LGPL-2.1) and the game's library art, which the installer downloads on your machine.
+- The game's art, in the `docs/` screenshots and in the library art the installer downloads.
+- BepInEx (LGPL-2.1), which the installer downloads.
 
 ## Donate
 

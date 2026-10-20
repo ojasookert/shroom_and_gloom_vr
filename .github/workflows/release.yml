@@ -1,0 +1,49 @@
+name: Release
+
+# Push a v* tag to release that version, or run this workflow by hand to release the next one
+# (the last number of the latest tag goes up: v0.0.1 -> v0.0.2).
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Version
+        id: version
+        run: |
+          if [ "$GITHUB_REF_TYPE" = tag ]; then
+            version=${GITHUB_REF_NAME#v}
+          else
+            latest=$(git tag --list 'v*' --sort=-v:refname | head -n1)
+            IFS=. read -r major minor build <<< "${latest:-v0.0.0}"
+            version="${major#v}.$minor.$((build + 1))"
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: installer
+      - name: Package
+        run: tools/package.sh "${{ steps.version.outputs.version }}"
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          target_commitish: ${{ github.sha }}
+          name: v${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          files: |
+            dist/ShroomVR-Installer-x86_64.AppImage
+            dist/ShroomVR-${{ steps.version.outputs.version }}.zip
+            dist/manifest.json

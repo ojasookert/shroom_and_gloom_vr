@@ -1,0 +1,32 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: installer
+      - name: Test the installer
+        working-directory: installer
+        run: |
+          cargo clippy --locked --release -- -D warnings
+          cargo test --locked --release
+      - name: Package
+        run: tools/package.sh "0.0.0-${GITHUB_SHA::7}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shroomvr-${{ github.sha }}
+          path: dist/

@@ -18,8 +18,8 @@ Fan project, not affiliated with Team Lazerbeam or Devolver Digital.
 - Steam Frame
 - Shroom and Gloom 0.6.41
 
-If you play it on a different setup, [open an issue](https://github.com/ojasookert/shroom_and_gloom_vr/issues)
-and say how it went, working or not.
+If you play it on a different setup, please [open an issue](https://github.com/ojasookert/shroom_and_gloom_vr/issues)
+and let me know how it went, whether it worked or not.
 
 ## Install
 

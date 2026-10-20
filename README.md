@@ -9,6 +9,15 @@ tested with a Steam Frame; Index, Touch and Vive controllers have bindings too.
 
 Fan project, not affiliated with Team Lazerbeam or Devolver Digital.
 
+## Tested on
+
+- Arch Linux, kernel 7.3, Sway
+- NVIDIA RTX 5090, driver 615.78
+- Steam (native) with Proton Experimental 11.0
+- SteamVR build 25998080
+- Steam Frame
+- Shroom and Gloom 0.6.41
+
 ## Install
 
 1. Start Shroom and Gloom once from Steam, then quit. This sets up its Proton prefix.

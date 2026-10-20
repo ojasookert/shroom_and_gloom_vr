@@ -70,24 +70,39 @@ public class VRRig : MonoBehaviour
         root.SetPositionAndRotation(rootWorld.MultiplyPoint3x4(Vector3.zero), rootWorld.rotation);
     }
 
-    static UnityEngine.UI.Image _deckBlack;
+    static Transform _deckBehind;
+    static UnityEngine.UI.Image[] _deckImages = Array.Empty<UnityEngine.UI.Image>();
+    static float _nextDeckImageLookup;
+    static readonly Dictionary<IntPtr, float> _deckAlpha = new();
 
     /// <summary>
-    /// The deck view covers the world with an opaque black image. Like the pause menu, it is dimmed
-    /// instead, so you still see where you are.
+    /// The deck view covers the world with opaque images (a black backdrop and its wipe-in transition).
+    /// Like the pause menu, they are dimmed instead, so you still see where you are. Alpha the game
+    /// animates is followed, not compounded.
     /// </summary>
     static void SeeThroughDeckBackground()
     {
-        if (_deckBlack == null)
+        if (_deckBehind == null)
         {
-            var t = _deck.transform.Find("Deck Displays Canvas/Deck Display/UIBehindCardsRect/BlackBackgroundGroup/Black");
-            if (t == null) return;
-            _deckBlack = t.GetComponent<UnityEngine.UI.Image>();
-            if (_deckBlack == null) return;
+            _deckBehind = _deck.transform.Find("Deck Displays Canvas/Deck Display/UIBehindCardsRect");
+            if (_deckBehind == null) return;
         }
-        float alpha = Mathf.Clamp01(VRConfig.DeckBackgroundOpacity.Value);
-        var c = _deckBlack.color;
-        if (Mathf.Abs(c.a - alpha) > 0.001f) _deckBlack.color = new Color(c.r, c.g, c.b, alpha);
+        if (!_deckBehind.gameObject.activeInHierarchy) return;
+        if (Time.unscaledTime >= _nextDeckImageLookup)
+        {
+            _nextDeckImageLookup = Time.unscaledTime + 1f;
+            _deckImages = _deckBehind.GetComponentsInChildren<UnityEngine.UI.Image>(true);
+        }
+        float opacity = Mathf.Clamp01(VRConfig.DeckBackgroundOpacity.Value);
+        foreach (var image in _deckImages)
+        {
+            if (image == null) continue;
+            var c = image.color;
+            if (!_deckAlpha.TryGetValue(image.Pointer, out var gameAlpha) || Mathf.Abs(c.a - gameAlpha * opacity) > 0.001f)
+                _deckAlpha[image.Pointer] = gameAlpha = c.a; // first sight, or the game changed it
+            float want = gameAlpha * opacity;
+            if (Mathf.Abs(c.a - want) > 0.001f) image.color = new Color(c.r, c.g, c.b, want);
+        }
     }
 
     static Camera OverlayViewCamera()

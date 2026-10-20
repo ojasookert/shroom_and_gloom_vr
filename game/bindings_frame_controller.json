@@ -1,0 +1,225 @@
+{
+  "action_manifest_version": 1,
+  "alias_info": {},
+  "app_key": "steam.app.3271280",
+  "category": "steamvr_input",
+  "controller_type": "frame_controller",
+  "description": "Laser on either trigger or grip; both sticks and the d-pad navigate; buttons match the game's gamepad prompts.",
+  "name": "Steam Frame default",
+  "options": {},
+  "simulated_actions": [],
+  "bindings": {
+    "/actions/main": {
+      "sources": [
+        {
+          "path": "/user/hand/left/input/trigger",
+          "mode": "trigger",
+          "inputs": {
+            "pull": {
+              "output": "/actions/main/in/Squeeze"
+            },
+            "click": {
+              "output": "/actions/main/in/Click"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/grip",
+          "mode": "trigger",
+          "inputs": {
+            "pull": {
+              "output": "/actions/main/in/GripSqueeze"
+            },
+            "click": {
+              "output": "/actions/main/in/Click"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/trigger",
+          "mode": "trigger",
+          "inputs": {
+            "pull": {
+              "output": "/actions/main/in/Squeeze"
+            },
+            "click": {
+              "output": "/actions/main/in/Click"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/grip",
+          "mode": "trigger",
+          "inputs": {
+            "pull": {
+              "output": "/actions/main/in/GripSqueeze"
+            },
+            "click": {
+              "output": "/actions/main/in/Click"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/thumbstick",
+          "mode": "joystick",
+          "inputs": {
+            "position": {
+              "output": "/actions/main/in/Stick"
+            },
+            "click": {
+              "output": "/actions/main/in/Run"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/thumbstick",
+          "mode": "joystick",
+          "inputs": {
+            "position": {
+              "output": "/actions/main/in/Stick"
+            },
+            "click": {
+              "output": "/actions/main/in/Recenter"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/a",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Confirm"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/b",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Cancel"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/x",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Inspect"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/y",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/EndTurn"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/menu",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Pause"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/view",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/DeckView"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/dpad_up",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/NavUp"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/dpad_down",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/NavDown"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/dpad_left",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/NavLeft"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/dpad_right",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/NavRight"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/bumper",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Map"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/bumper",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/SortHand"
+            }
+          }
+        }
+      ],
+      "poses": [
+        {
+          "output": "/actions/main/in/PoseAim",
+          "path": "/user/hand/left/pose/tip"
+        },
+        {
+          "output": "/actions/main/in/PoseAim",
+          "path": "/user/hand/right/pose/tip"
+        },
+        {
+          "output": "/actions/main/in/PoseGrip",
+          "path": "/user/hand/left/pose/raw"
+        },
+        {
+          "output": "/actions/main/in/PoseGrip",
+          "path": "/user/hand/right/pose/raw"
+        }
+      ],
+      "haptics": [
+        {
+          "output": "/actions/main/out/Haptic",
+          "path": "/user/hand/left/output/haptic"
+        },
+        {
+          "output": "/actions/main/out/Haptic",
+          "path": "/user/hand/right/output/haptic"
+        }
+      ]
+    }
+  }
+}

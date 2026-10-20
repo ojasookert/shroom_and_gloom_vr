@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "minimum_required_version": 1,
+  "default_bindings": [
+    {
+      "controller_type": "frame_controller",
+      "binding_url": "bindings_frame_controller.json"
+    },
+    {
+      "controller_type": "knuckles",
+      "binding_url": "bindings_knuckles.json"
+    },
+    {
+      "controller_type": "oculus_touch",
+      "binding_url": "bindings_oculus_touch.json"
+    },
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "bindings_vive_controller.json"
+    }
+  ],
+  "actions": [
+    {
+      "name": "/actions/main/in/Click",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Confirm",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Cancel",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Pause",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Inspect",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/DeckView",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Map",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/SortHand",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Recenter",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/PagePrev",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/PageNext",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Run",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Grab",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/EndTurn",
+      "type": "boolean",
+      "requirement": "suggested"
+    },
+    {
+      "name": "/actions/main/in/ToggleLaserHand",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/NavUp",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/NavDown",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/NavLeft",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/NavRight",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/main/in/Squeeze",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/main/in/GripSqueeze",
+      "type": "vector1"
+    },
+    {
+      "name": "/actions/main/in/Stick",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/main/in/PoseAim",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/main/in/PoseGrip",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/main/out/Haptic",
+      "type": "vibration"
+    }
+  ],
+  "action_sets": [
+    {
+      "name": "/actions/main",
+      "usage": "leftright"
+    }
+  ],
+  "localization": [
+    {
+      "language_tag": "en_US",
+      "/actions/main": "Shroom and Gloom VR",
+      "/actions/main/in/Click": "Laser Click / Grab",
+      "/actions/main/in/Confirm": "Confirm",
+      "/actions/main/in/Cancel": "Cancel / Back",
+      "/actions/main/in/Pause": "Pause Menu",
+      "/actions/main/in/Inspect": "Inspect card",
+      "/actions/main/in/DeckView": "Toggle Deck View",
+      "/actions/main/in/Map": "Toggle Map",
+      "/actions/main/in/SortHand": "Sort Hand",
+      "/actions/main/in/Recenter": "Recenter View",
+      "/actions/main/in/PagePrev": "Previous Page",
+      "/actions/main/in/PageNext": "Next Page",
+      "/actions/main/in/Run": "Run",
+      "/actions/main/in/Grab": "Grab",
+      "/actions/main/in/ToggleLaserHand": "Switch Laser Hand",
+      "/actions/main/in/Squeeze": "Trigger Squeeze",
+      "/actions/main/in/PoseAim": "Pointer Pose",
+      "/actions/main/in/PoseGrip": "Hand Pose",
+      "/actions/main/out/Haptic": "Haptics",
+      "/actions/main/in/EndTurn": "End turn",
+      "/actions/main/in/Stick": "Navigate / Walk",
+      "/actions/main/in/NavUp": "Navigate Up",
+      "/actions/main/in/NavDown": "Navigate Down",
+      "/actions/main/in/NavLeft": "Navigate Left",
+      "/actions/main/in/NavRight": "Navigate Right",
+      "/actions/main/in/GripSqueeze": "Grip Squeeze"
+    }
+  ]
+}

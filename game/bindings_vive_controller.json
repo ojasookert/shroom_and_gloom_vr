@@ -1,0 +1,129 @@
+{
+  "action_manifest_version": 1,
+  "alias_info": {},
+  "app_key": "steam.app.3271280",
+  "category": "steamvr_input",
+  "controller_type": "vive_controller",
+  "description": "Laser on either trigger; left pad walks, right pad turns.",
+  "name": "Vive wand default",
+  "options": {},
+  "simulated_actions": [],
+  "bindings": {
+    "/actions/main": {
+      "sources": [
+        {
+          "path": "/user/hand/left/input/trigger",
+          "mode": "trigger",
+          "inputs": {
+            "pull": {
+              "output": "/actions/main/in/Squeeze"
+            },
+            "click": {
+              "output": "/actions/main/in/Click"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/trigger",
+          "mode": "trigger",
+          "inputs": {
+            "pull": {
+              "output": "/actions/main/in/Squeeze"
+            },
+            "click": {
+              "output": "/actions/main/in/Click"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/grip",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Inspect"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/grip",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Cancel"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/trackpad",
+          "mode": "trackpad",
+          "inputs": {
+            "position": {
+              "output": "/actions/main/in/Stick"
+            },
+            "click": {
+              "output": "/actions/main/in/EndTurn"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/trackpad",
+          "mode": "trackpad",
+          "inputs": {
+            "position": {
+              "output": "/actions/main/in/Stick"
+            },
+            "click": {
+              "output": "/actions/main/in/Recenter"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/left/input/application_menu",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Map"
+            }
+          }
+        },
+        {
+          "path": "/user/hand/right/input/application_menu",
+          "mode": "button",
+          "inputs": {
+            "click": {
+              "output": "/actions/main/in/Pause"
+            }
+          }
+        }
+      ],
+      "poses": [
+        {
+          "output": "/actions/main/in/PoseAim",
+          "path": "/user/hand/left/pose/tip"
+        },
+        {
+          "output": "/actions/main/in/PoseAim",
+          "path": "/user/hand/right/pose/tip"
+        },
+        {
+          "output": "/actions/main/in/PoseGrip",
+          "path": "/user/hand/left/pose/raw"
+        },
+        {
+          "output": "/actions/main/in/PoseGrip",
+          "path": "/user/hand/right/pose/raw"
+        }
+      ],
+      "haptics": [
+        {
+          "output": "/actions/main/out/Haptic",
+          "path": "/user/hand/left/output/haptic"
+        },
+        {
+          "output": "/actions/main/out/Haptic",
+          "path": "/user/hand/right/output/haptic"
+        }
+      ]
+    }
+  }
+}

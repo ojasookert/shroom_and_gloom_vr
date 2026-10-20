@@ -1,0 +1,17 @@
+{
+  "name": "XRSDKOpenVR",
+  "version": "1.2.4",
+  "libraryName": "XRSDKOpenVR",
+  "displays": [
+    {
+      "id": "OpenVR Display"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "OpenVR Input",
+      "disablesLegacyInput": true,
+      "disablesLegacyVr": true
+    }
+  ]
+}

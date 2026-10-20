@@ -9,6 +9,8 @@ tested with a Steam Frame; Index, Touch and Vive controllers have bindings too.
 
 Fan project, not affiliated with Team Lazerbeam or Devolver Digital.
 
+https://github.com/user-attachments/assets/8904736a-16da-40cf-a877-22b352ecbe5a
+
 ## Tested on
 
 - Arch Linux, kernel 7.3, Sway
